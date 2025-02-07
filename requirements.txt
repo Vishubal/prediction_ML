@@ -1,0 +1,11 @@
+# pandas
+numpy
+# matplotlib
+# seaborn
+# kagglehub
+# sklearn
+pickle
+fastapi
+pydantic 
+uvicorn
+nest_asyncio
