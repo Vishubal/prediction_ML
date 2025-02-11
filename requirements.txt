@@ -1,9 +1,9 @@
-# pandas
+pandas
 numpy
-# matplotlib
-# seaborn
-# kagglehub
-# sklearn
+matplotlib
+seaborn
+kagglehub
+sklearn
 fastapi[standard]
 pydantic 
 uvicorn
