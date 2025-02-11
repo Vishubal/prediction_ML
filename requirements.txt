@@ -3,7 +3,7 @@ numpy
 matplotlib
 seaborn
 kagglehub
-sklearn
+scikit-learn
 fastapi[standard]
 pydantic 
 uvicorn
