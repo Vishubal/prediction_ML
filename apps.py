@@ -5,6 +5,7 @@ import nest_asyncio
 #from pyngrok import ngrok
 import numpy as np
 from fastapi.middleware.cors import CORSMiddleware
+import pickle 
 
 
 # Initialize FastAPI app
