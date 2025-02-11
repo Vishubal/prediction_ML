@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
 import nest_asyncio
-from pyngrok import ngrok
+#from pyngrok import ngrok
 import numpy as np
 from fastapi.middleware.cors import CORSMiddleware
 

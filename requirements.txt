@@ -4,7 +4,6 @@ numpy
 # seaborn
 # kagglehub
 # sklearn
-pickle
 fastapi
 pydantic 
 uvicorn
