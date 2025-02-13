@@ -51,7 +51,7 @@ def predict_car_purchase(input_data: CarPurchase):
   return {"prediction": result}
 
 # Run the server
-nest_asyncio.apply()
+#nest_asyncio.apply()
 
 #uvicorn.run(app, host="0.0.0.0", port=8000)
 
