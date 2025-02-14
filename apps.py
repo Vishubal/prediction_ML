@@ -22,12 +22,12 @@ app.add_middleware(
 )
 
 # Load the saved model and scaler
-car_model = pickle.load(open('./src/prediction_models/car_purchase_decision_model.pkl', 'rb'))
-car_scaler = pickle.load(open('./src/prediction_models/car_purchase_decision_scaler.pkl', 'rb'))
+loan_prediction_model = pickle.load(open('./src/prediction_models/loan_prediction_decision_model.pkl', 'rb'))
+loan_prediction_scaler = pickle.load(open('./src/prediction_models/loan_predictione_decision_scaler.pkl', 'rb'))
 
 
 # Define input schema
-class CarPurchase(BaseModel):
+class LoanPrediction(BaseModel):
   features: list
 
 # Welcome Endpoint
@@ -36,17 +36,17 @@ def read_root():
   return {"message": "Welcome to the Model Prediction API! ✔"}
 
 # Define prediction endpoint
-@app.post("/predict/car_purchase")
-def predict_car_purchase(input_data: CarPurchase):
+@app.post("/predict/loan_prediction")
+def predict_loan_eligibility(input_data: LoanPrediction):
   # Convert input list to NumPy array
   input_array = np.array(input_data.features).reshape(1, -1)
 
   # scale the input features
-  scaled_data = car_scaler.transform(input_array)
+  scaled_data = loan_prediction_scaler.transform(input_array)
 
   # Make prediction
-  prediction = car_model.predict(scaled_data)
-  result = "Car purchase approved" if prediction[0] == 1 else "Car purchase denied"
+  prediction = loan_prediction_model.predict(scaled_data)
+  result = "Loan approved" if prediction[0] == 1 else "Loan denied"
 
   return {"prediction": result}
 
