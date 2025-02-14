@@ -6,6 +6,7 @@ import nest_asyncio
 import numpy as np
 from fastapi.middleware.cors import CORSMiddleware
 import pickle 
+import os
 
 
 # Initialize FastAPI app
@@ -21,13 +22,27 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+model_path = os.path.abspath("./src/prediction_models/car_purchase_decision_model.pkl")
+scaler_path = os.path.abspath("./src/prediction_models/car_purchase_decision_scaler.pkl")
+
 # Load the saved model and scaler
-loan_prediction_model = pickle.load(open('./src/prediction_models/loan_prediction_decision_model.pkl', 'rb'))
-loan_prediction_scaler = pickle.load(open('./src/prediction_models/loan_predictione_decision_scaler.pkl', 'rb'))
+# car_model = pickle.load(open('./src/prediction_models/car_purchase_decision_model.pkl', 'rb'))
+# car_scaler = pickle.load(open('./src/prediction_models/car_purchase_decision_scaler.pkl', 'rb'))
+# Load the saved model and scaler
+try:
+    with open(model_path, "rb") as model_file:
+        car_model = pickle.load(model_file)
+
+    with open(scaler_path, "rb") as scaler_file:
+        car_scaler = pickle.load(scaler_file)
+
+    print("âœ… Model and Scaler Loaded Successfully!")
+except Exception as e:
+    print(f"âŒ Error Loading Model: {e}")
 
 
-# Define input schema
-class LoanPrediction(BaseModel):
+# # Define input schema
+class CarPurchase(BaseModel):
   features: list
 
 # Welcome Endpoint
@@ -36,22 +51,22 @@ def read_root():
   return {"message": "Welcome to the Model Prediction API! ✔"}
 
 # Define prediction endpoint
-@app.post("/predict/loan_prediction")
-def predict_loan_eligibility(input_data: LoanPrediction):
+@app.post("/predict/car_purchase")
+def predict_car_purchase(input_data: CarPurchase):
   # Convert input list to NumPy array
   input_array = np.array(input_data.features).reshape(1, -1)
 
   # scale the input features
-  scaled_data = loan_prediction_scaler.transform(input_array)
+  scaled_data = car_scaler.transform(input_array)
 
   # Make prediction
-  prediction = loan_prediction_model.predict(scaled_data)
-  result = "Loan approved" if prediction[0] == 1 else "Loan denied"
+  prediction = car_model.predict(scaled_data)
+  result = "Car purchase approved" if prediction[0] == 1 else "Car purchase denied"
 
   return {"prediction": result}
 
 # Run the server
-nest_asyncio.apply()
+# nest_asyncio.apply()
 
 #uvicorn.run(app, host="0.0.0.0", port=8000)
 
