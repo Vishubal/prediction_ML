@@ -25,8 +25,8 @@ app.add_middleware(
 model_path = os.path.abspath("./src/prediction_models/car_purchase_decision_model.pkl")
 scaler_path = os.path.abspath("./src/prediction_models/car_purchase_decision_scaler.pkl")
 
-loan_model_path = os.path.abspath("./src/prediction_models/loan_prediction_decision_model.pkl")
-loan_scaler_path = os.path.abspath("./src/prediction_models/loan_prediction_decision_scaler.pkl")
+loan_model_path = os.path.abspath("./src/prediction_models/loan_prediction_model.pkl")
+loan_scaler_path = os.path.abspath("./src/prediction_models/loan_prediction_scaler.pkl")
 
 
 # Load the saved model and scaler
